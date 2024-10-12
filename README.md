@@ -2,7 +2,15 @@
 
 **Machine Learning on Interictal Intracranial EEG Predicts Surgical Outcome in Drug Resistant Epilepsy**
 
-Hmayag Partamian<sup>1,2</sup>, Saeed Jahromi<sup>1,2</sup>, Ludovica Corona<sup>1,2</sup>, M Scott Perry<sup>1</sup>, Eleonora Tamilia<sup>3,5</sup>, Joseph R. Madsen<sup>4</sup>, Jeffrey Bolton<sup>5</sup>, Scellig S.D. Stone<sup>4</sup>, Phillip L. Pearl<sup>5</sup>, Christos Papadelis<sup>1,2,6\*</sup>
+Hmayag Partamian, Saeed Jahromi, Ludovica Corona, M Scott Perr, Eleonora Tamilia, Joseph R. Madsen, Jeffrey Bolton, Scellig S.D. Stone, Phillip L. Pearl, Christos Papadelis
+
+
+<p align="center">
+  <img width="100%" src="figures/Methodology.png"/>
+</p> 
+
+**Figure 1**. **Overall processing pipeline.** **a** Coregistration of MRI and computed tomography (CT) with intracranial implantations to identify the intracranial EEG (iEEG) electrode coordinates. Preoperative and postoperative MRIs were used to define the resected volume. The resection and clinically defined seizure onset zone (SOZ) were used as gold standards for the epileptogenic zone (EZ) prediction. **b** Five minutes of n-channel iEEG data filtered in two frequency bands, i.e., spike band (sb) [1-80 Hz] and ripple band (rb) [80-250 Hz], using Butterworth filters. In each band, data were dissected into d ms (250 and 150 ms for sb and rb, respectively) time-windows through a sliding window approach with 95% overlap resulting in L time-windows (L_1 for sb and L_2 for rb). Each time-window was processed using dynamic mode decomposition (DMD) with h time delay embeddings to extract r_1 (for  sb) and r_2 (for rb) oscillatory components and their corresponding DMD spectra per channel. The DMD spectra matrices contain coherent spatial maps (DMD power spectra across channels) per component across all time-windows. **c** The feature matrices were constructed by averaging the DMD spectral powers of the components of each channel in the seven physiologically relevant frequency bands [delta (δ = 1-4 Hz), theta (θ= 4-8 Hz), alpha (α = 8-12 Hz), beta (β = 12-30 Hz), gamma (γ = 30-80 Hz), spike band (sb = 1-80 Hz), and ripple band (rb = 80-250 Hz)], and scaled between 0 and 1. The entire network was then computed by averaging the feature matrices across time-windows in each frequency band. Next, the unsupervised machine learning (ML) method [non-negative matrix factorization (NNMF)] automatically extracted for each frequency band two brain networks and their corresponding temporal map. **d** The two networks were categorized as epileptogenic (red-colored) and background (blue-colored). Three network properties were then computed: focality, overlap with resection, and distance from resection. **e** The temporal maps in different frequency bands showed the active segments of the epileptogenic (red-colored) and background (blue-colored) networks across time which were concordant with interictal epileptiform discharge (IED) (pink-colored) and ripple annotations (purple-colored). 
+
 
 **Table of Contents**
 
