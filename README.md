@@ -204,9 +204,9 @@ The following results are expected when running demo_run_P1.m.
 
 ### **Temporal maps**
 
-
-  ![alt text](https://github.com/Hmayag11/AutoEZ/blob/main/figures/TemporalMap50sec_P1?raw=true)
-
+<p align="center">
+  <img width="45%" src="figures/emporalMap50sec_P1.png"/>
+</p> 
 
 **Figure 1**. **Temporal maps in the spike and ripple bands of good outcome patient 1.** Sample iEEG (50 s) in the spike band with spike annotations (red vertical lines) and its corresponding temporal maps generated using our framework. Sample iEEG (50 s) in the ripple band with ripple annotations (red vertical lines) and its corresponding temporal maps generated from the framework. Red timestamps in the temporal map are time-windows where the epileptogenic network is active while the blue timestamps represent the time-windows where the background network is active.
 
