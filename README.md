@@ -14,44 +14,46 @@ Hmayag Partamian, Saeed Jahromi, Ludovica Corona, M Scott Perr, Eleonora Tamilia
 
 **Table of Contents**
 
-[**Folders** 1](#_Toc178680894)
-[**Prerequisites** 2](#_Toc178680895)
-[**Installation time** 3](#_Toc178680896)
-[**Expected runtime** 3](#_Toc178680897)
-[**Getting started** 3](#_Toc178680898)
-[**Loading data** 3](#_Toc178680899)
-[**Processing pipeline** 4](#_Toc178680900)
-[**Output of the code** 5](#_Toc178680901)
-[**Expected output** 5](#_Toc178680902)
-[**Good-outcome patient 1** 5](#_Toc178680903)
-[**Temporal maps** 5](#_Toc178680904)
-[**Epileptogenic and background networks in the band** 6](#_Toc178680905)
-[**Properties of networks in the band** 6](#_Toc178680906)
-[**Poor-outcome patient 31** 7](#_Toc178680907)
-[**Temporal Maps** 7](#_Toc178680908)
-[**Epileptogenic and background networks in the band** 8](#_Toc178680909)
-[**Properties of networks in the band** 8](#_Toc178680910)
-[**Running the framework on your own data** 9](#_Toc178680911)
-[**References** 9](#_Toc178680912)
+* [**Folders** 1](#_Toc178680894)
+* [**Prerequisites** 2](#_Toc178680895)
+* [**Installation time** 3](#_Toc178680896)
+* [**Expected runtime** 3](#_Toc178680897)
+* [**Getting started** 3](#_Toc178680898)
+* [**Loading data** 3](#_Toc178680899)
+* [**Processing pipeline** 4](#_Toc178680900)
+* [**Output of the code** 5](#_Toc178680901)
+* [**Expected output** 5](#_Toc178680902)
+* [**Good-outcome patient 1** 5](#_Toc178680903)
+* [**Temporal maps** 5](#_Toc178680904)
+* [**Epileptogenic and background networks in the band** 6](#_Toc178680905)
+* [**Properties of networks in the band** 6](#_Toc178680906)
+* [**Poor-outcome patient 31** 7](#_Toc178680907)
+* [**Temporal Maps** 7](#_Toc178680908)
+* [**Epileptogenic and background networks in the band** 8](#_Toc178680909)
+* [**Properties of networks in the band** 8](#_Toc178680910)
+* [**Running the framework on your own data** 9](#_Toc178680911)
+* [**References** 9](#_Toc178680912)
 
 # **Folders**
-**anatomy**
-	CT_P1.nii
-	CT_P31.nii
-	MRI_P1.nii
-	MRI_P31.nii
+$ ./tree-md .
+# Project tree
+* **anatomy**
+	* CT_P1.nii
+	* CT_P31.nii
+	* MRI_P1.nii
+	* MRI_P31.nii
 
-**figures**
-	background_network_P1.png
-	background_network_P31.png
-	epileptogenic_network_P1.png
-	epileptogenic_network_P31.png
-	temporal_map_P1.png
-	temporal_map_P31.png
+* **figures**
+	* background_network_P1.png
+	* background_network_P31.png
+	* epileptogenic_network_P1.png
+	* epileptogenic_network_P31.png
+	* temporal_map_P1.png
+	* temporal_map_P31.png
 	properties_P1.png
 	properties_P31.png
 
-**functions**
+* **functions**
 	checkDICOM.m
 	distiance_electrodes_to_resection.m
 	DMDfull.m
