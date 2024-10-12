@@ -39,6 +39,7 @@ if figflag
         surf(X1*val(i)+channel_coordinates(i,1),Y1*val(i)+channel_coordinates(i,2),Z1*val(i)+channel_coordinates(i,3),'Facecolor','w','Edgecolor','w','FaceAlpha',0.5)
     end
     axis square
+    xlim([-0.1,0.18])
     title('MRI, Resection Volume, and Electrodes of Patient 31')
     set(gca,'xticklabel',{[]})
     set(gca,'yticklabel',{[]})
@@ -74,8 +75,6 @@ if figflag
     for i=1:n
         channels{i}=num2str(n-i+1);
     end
-    xlabel('time (s)')
-    ylabel('channel ID')
     yticklabels(channels)
     set(gca,'fontsize',8)
     set(gcf, 'Position', get(0, 'Screensize'));
@@ -99,6 +98,7 @@ if figflag
         plot(time,ieeg_filtered_spike(i,:)-0.0015*i,'k','linewidth',1.5);
         hold on
     end
+    xlabel('time (s)')
     hold on
     xline(spike_annotation,'r')
     xlim([0 50])
@@ -108,8 +108,6 @@ if figflag
     for i=1:n
         channels{i}=num2str(n-i+1);
     end
-    xlabel('time (s)')
-    ylabel('channel ID')
     yticklabels(channels)
     set(gca,'fontsize',8)
     set(gcf, 'Position', get(0, 'Screensize'));
@@ -125,7 +123,7 @@ offset=0.125; % determines how much (in seconds) before and after a point in tim
 %% identify bands of modes, collect the IDs using the mean frequency of all windows
 ids0=getIndices(freq_mean,r_input);
 
-%% extract the networks in the six subbands of sb
+%% Ectract the networks in the six subbands of sb
 k=2; % we assumed two networks and set k=2
 networks_new=cell(7);
 temporal_map_new=zeros(7,length(Lsb));
@@ -138,7 +136,7 @@ for bd=1:6
 end
 
 %% ripple band analysis (same flow as spike)
-% filter the data in sb band [1-80]Hz
+%filter the data in sb band [1-80]Hz
 ieeg_filtered_ripple=zeros(size(ieeg));
 f1=80;
 f2=250;
@@ -146,24 +144,24 @@ f2=250;
 for i=1:n
     ieeg_filtered_ripple(i,:)=filtfilt(b,a,double(ieeg(i,:)));
 end
-% plot the data in the ripple band
+%plot the data in the ripple band
 if figflag
     figure;
     for i=1:n
         plot(time,ieeg_filtered_ripple(i,:)-0.0004151*i,'k','linewidth',1.5);
         hold on
     end
+    %
     xlabel('time (s)')
     hold on
     xline(ripple_annotation,'r')
     xlim([0 50])
+    % ylim([-0.125 0])
     set(gcf,'color','w')
     yticks(fliplr(-0.0004151*(1:n)))
     for i=1:n
         channels{i}=num2str(n-i+1);
     end
-    xlabel('time (s)')
-    ylabel('channel ID')
     yticklabels(channels)
     a = get(gca,'XTickLabel');
     set(gca,'fontsize',8)
@@ -177,13 +175,13 @@ offset=0.075;% determines how much (in seconds) before and after a point in time
 [P_rb,freq_mean,Lrb]=extractFeatures(ieeg_filtered_ripple,perc,Fs,r_input,offset,ripple_annotation);
 
 %% Identify networks and temporal maps using NNMF
-ids00=1:100;% all modes are used for ripple band
+ids00=1:100;% All modes are used for ripple band
 [networks_en,networks_bk,temporal_map]=Extract_networks_and_temporal_maps(P_rb,ids00,k);
-% averaging to find consistent networks and temporal maps
+%averaging to find consistent networks and temporal maps
 networks_new{7}=[mean(networks_bk);mean(networks_en)];
 temporal_map_new(7,:)=mean(temporal_map)>1.5;
 
-%% plot temporal maps
+%% Plot temporal maps
 end1=50*Fs;
 if figflag
     figure;
@@ -288,7 +286,7 @@ if figflag
     saveas(gcf, './results/TemporalMap10sec_P31.png')
 end
 
-%% plot the epileptogenic and background networks
+%% Plot the Epileptogenic and Background networks
 % choose band to analyze:  1= delta; 2=theta;3=alpha;4=beta;5=gamma;6=sb;7=rb%
 bd_current=2; 
 
@@ -432,6 +430,7 @@ end
 %% properties of the networks
 % computes the focality, overlap, and distance from resection for both
 % networks
+addpath('C:\Users\hpartamian-temp\OneDrive - UT Arlington\Microsoft Teams Chat Files\')
 Fnet=zeros(2,7);
 Ores=zeros(2,7);
 Dres=zeros(2,7);
@@ -564,7 +563,6 @@ if figflag
     set(gcf,'color','w')
     sgtitle('Patient 31 Network Properties in the \theta band ({\color{blue}BN\color{black} & \color{red}EN}) ')
     set(gcf, 'Position', get(0, 'Screensize'));
-    saveas(gcf, './results/NetworkProperties_P31.png')
 end
 
 

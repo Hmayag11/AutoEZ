@@ -1,197 +1,277 @@
-# Spatial-Perturbation-Framework
+**MATLAB Code Manual for**
 
-## Table of Contents
-  * [Folders](#folders)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-  * [Expected runtime](#expected-runtime)
-  * [Getting started](#getting-started)
-  * [Running the SP framework on your own data](#running-the-SP-framework-on-your-own-data)
-  * [Reproducing results](#reproducing-results)
-  * [Expected output](#expected-output)
-  * [References](#references)
+**Machine Learning on Interictal Intracranial EEG Predicts Surgical Outcome in Drug Resistant Epilepsy**
 
-## Folders
-```bash
-.
-├── LICENSE
-├── README.md
-├── demo_data
-│   ├── P4_sample.mat
-│   ├── P58_sample.mat
-│   └── patient_data.mat
-├── figures
-│   ├── rSP_output_P4.png
-│   ├── rSP_output_P58.png
-│   └── vSP_output_P4.png
-├── functions
-│   ├── boxplot_gramm.m
-│   ├── dunns.m
-│   ├── plotFeatureSpace.m
-│   ├── scatter_gramm.m
-│   └── sphereIntersection.m
-├── perturbation
-│   ├── computeCorrelation.m
-│   ├── computeSPMap.m
-│   ├── train_kmeans.m
-│   └── virtualRemovalSP.m
-├── rSP_demo.m
-├── results_figures
-│   ├── figure3_4_perturbation_analysis.m
-│   ├── figure6_sp_map_examples.m
-│   ├── figure7_cluster_analysis.m
-│   ├── figure8_9_covariate_analysis.m
-│   └── sp_results
-│       ├── SPMap_features.mat
-│       ├── sp_maps.mat
-│       └── virtual_removal_perturbation.mat
-├── results_pipeline.m
-├── spike_gamma_code
-│   ├── computeSpikeGamma.m
-│   ├── compute_gamma.m
-│   ├── compute_spike_boundary.m
-│   ├── postprocessing_v2.m
-│   └── spike_detector_hilbert_v25.m
-└── vSP_demo.m
-```
+Hmayag Partamian<sup>1,2</sup>, Saeed Jahromi<sup>1,2</sup>, Ludovica Corona<sup>1,2</sup>, M Scott Perry<sup>1</sup>, Eleonora Tamilia<sup>3,5</sup>, Joseph R. Madsen<sup>4</sup>, Jeffrey Bolton<sup>5</sup>, Scellig S.D. Stone<sup>4</sup>, Phillip L. Pearl<sup>5</sup>, Christos Papadelis<sup>1,2,6\*</sup>
 
-## Prerequisites
-- MATLAB R2023a or higher
-- The following MATLAB add-ons need to be installed:
-    - 'Curve Fitting Toolbox'
-    - 'Image Processing Toolbox'
-    - 'Signal Processing Toolbox'
-    - 'Statistics and Machine Learning Toolbox'
-    - 'Wavelet Toolbox'
-    - 'gramm' (Morel, 2018)
-- Windows, macOS, or Linux operating system
+**Table of Contents**
 
-## Installation
-Download the repository into your local computer using the following command  
-```bash 
-git clone https://github.com/Lab-Frauscher/SPF.git
-```
-Install each prerequisite by first opening MATLAB R2023a, navigate to Home->Add-ons->Get Add-ons. Type in the name of each respective toolbox in the search bar and install.
+[**Folders** 1](#_Toc178680894)
 
-Typical install time: 2 hours
+[**Prerequisites** 2](#_Toc178680895)
 
-## Expected runtime
-Time to run ```vSP_demo.m```: 21.774976 seconds  
-Time to run ```rSP_demo.m```: 22.131166 seconds
+[**Installation time** 3](#_Toc178680896)
+
+[**Expected runtime** 3](#_Toc178680897)
+
+[**Getting started** 3](#_Toc178680898)
+
+[**Loading data** 3](#_Toc178680899)
+
+[**Processing pipeline** 4](#_Toc178680900)
+
+[**Output of the code** 5](#_Toc178680901)
+
+[**Expected output** 5](#_Toc178680902)
+
+[**Good-outcome patient 1** 5](#_Toc178680903)
+
+[**Temporal maps** 5](#_Toc178680904)
+
+[**Epileptogenic and background networks in the band** 6](#_Toc178680905)
+
+[**Properties of networks in the band** 6](#_Toc178680906)
+
+[**Poor-outcome patient 31** 7](#_Toc178680907)
+
+[**Temporal Maps** 7](#_Toc178680908)
+
+[**Epileptogenic and background networks in the band** 8](#_Toc178680909)
+
+[**Properties of networks in the band** 8](#_Toc178680910)
+
+[**Running the framework on your own data** 9](#_Toc178680911)
+
+[**References** 9](#_Toc178680912)
+
+# **Folders**
+
+**anatomy**
+
+CT_P1.nii
+
+CT_P31.nii
+
+MRI_P1.nii
+
+MRI_P31.nii
+
+**figures**
+
+background_network_P1.png
+
+background_network_P31.png
+
+epileptogenic_network_P1.png
+
+epileptogenic_network_P31.png
+
+temporal_map_P1.png
+
+temporal_map_P31.png
+
+properties_P1.png
+
+properties_P31.png
+
+**functions**
+
+checkDICOM.m
+
+distiance_electrodes_to_resection.m
+
+DMDfull.m
+
+Extract_networks_and_temporal_maps.m
+
+extractFeatures.m
+
+getIndices.m
+
+**sample_data**
+
+sample_data_P1.mat
+
+sample_data_P31.mat
+
+MRI_P1.fig
+
+MRI_P31.fig
+
+demo_run_P1.m
+
+demo_run_P31.m
+
+LICENSE
+
+README.md
+
+# **Prerequisites**
+
+MATLAB (we applied the framework with MATLAB R2019a and 2024a)
+
+• The following MATLAB add-ons need to be installed:
+
+– ‘Signal Processing Toolbox’
+
+– ‘Statistics and Machine Learning Toolbox’
+
+– ‘Image Processing Toolbox’
+
+• Brainstorm <sup>2</sup> (only for preprocessing the MRI and CT-scans and visualization purposes)
+
+• DMD code ‘DMDfull.m’ <sup>1</sup>, (<http://dmdbook.com/>)
+
+• Windows, macOS, or Linux operating system
+
+# **Installation time**
+
+None. Simple unzipping and preparation of the script (fixing paths and preparing your data in the format specified).
+
+# **Expected runtime**
+
+The experiments were performed on a Dell desktop with 12th Gen Intel(R) Core (TM) i9-12900 2.40 GHz with 128 GB RAM, and 64-bit operating system (x64-based processor) Windows 10.
+
+To process 50-second iEEG with 80-120 channels, with sampling frequency of 1999 Hz, using 95% overlap, and using MATLAB 2024a, the expected overall running time is around 50-90 seconds.
+
+# **Getting started**
+
+After running MATLAB and downloading and unzipping the code folder, set the current workspace to the repository folder, adjust the paths in the scripts to their corresponding paths, and run the demo_run_P1.m (Good outcome patient) or demo_run_P13.m (Poor Outcome Patient)
+
+demo_run_P1.m
+
+demo_run_P13.m
+
+The demo scripts will automatically perform the following:
+
+- Read and preprocess the data, extract the features and the networks, and identify the epileptogenic and background networks.
+- Generate the temporal maps with a sample data with annotations in both the spike and ripple bands.
+- Compute the network properties and evaluate the AUC with resection, SOZ, and temporal map concordance with IED.
+
+**Note:** To plot the networks, we provided 3D figures for each of the two patients generated by Brainstorm. The figures might not load if Brainstorm is not installed. Since the function hold on doesn’t function directly on such figures, the user must click anywhere inside the figure first and then run the next script to plot the network over these 3D figures (we noted the locations in the script where this step should be done with the current data). When the user generates the 3D plots directly from Brainstorm (when used with fully processed data), this problem is not encountered.
+
+# **Loading data**
+
+The demo scripts will use the data of two patients sampled from our cohort. P1 was seizure free (good outcome) and P31 had recurring seizures (poor outcome).
+
+sample_data_P1.mat
+
+sample_data_P31.mat
+
+When these MATLAB files are loaded, they contain the following matrices:
+
+- Fs : sampling frequency.
+- iEEG : 50 second n-channel iEEG data.
+- time : time in seconds.
+- channel_coordinates : containing the coordinates of the implanted n electrodes.
+- soz_channels : contains a vector of size n with 0’s (non-SOZ) and 1’s (SOZ).
+- resection_coordinates : contains the coordinates of the resection volume.
+- spike_annotation : contains the annotations of spikes in time.
+- ripple_annotation : contains the annotations of ripples in time.
+- CustomColormap : a custom colormap used to set the desired network colors (red for epileptogenic and blue for background).
+
+**Note:** We provided in the anatomy folder the MRI and implantation CT in NIfTI in case the user wants to process the data from scratch. We used these files to coregister the CT and MRI and generate the channel coordinates of the provided data. The 3D views of the MRIs in Brainstorm were used in generated figures.
+
+# **Processing pipeline**
+
+The code runs by calling different functions listed in the function folder:
+
+1. The data is first filtered in the spike band \[1-80 Hz\] using 4<sup>th</sup> order Butterworth filter (MATLAB)
+2. After setting the percentage overlap, number of modes, and window size parameter “offset”, the extractFeatures function dissects the data into windows, applies the DMD, and outputs the DMD spectral power features, the mean frequency of modes across windows, and the spike labels of each window.
+3. The mean frequencies are processed using getIndices function to identify indices of the modes that fall within each of the six band for the spike band analysis.
+4. Extract_networks_and_temporal_maps function takes the indices and the DMD spectral powers across windows to find the dominantly reoccurring spatial configurations and their corresponding activity across windows. The function also identifies the epileptogenic and background networks and outputs the indices of the temporal maps.
+5. Steps 1-4 are repeated in the ripple band \[80-250\] and ripple annotations to extract the epileptogenic and background networks and their temporal maps in the ripple band.
+6. The temporal maps and networks can now be visualized via plots.
+7. The network properties (Focality, overlap with resolution, and distance from resection) are computed.
+8. AUC with SOZ, resection, and ripple and spike annotations are then computed to generate the properties plots.
+
+# **Output of the code**
+
+The code outputs:
+
+- The time series data, the annotations (spikes and ripples), and the temporal maps in the spike and the ripple bands
+- The networks projected on the MRI as well as the resection volumes.
+- The network properties (focality, overlap with resection, and distance from resection), and receiver operating curve area under the curve (AUC) with the seizure onset zone (SOZ), resection (RES), and the AUC of the active time-windows with the annotated timestamps of the IEDs and ripples.
+- Frequency bands: Frequency bands: delta 1-4 Hz), theta (4-8 Hz), alpha (= 8-12 Hz), beta (=12-30 Hz), gamma (= 30-80 Hz), spike band (= 1-80 Hz), ripple band (= 80-250 Hz).
+
+# **Expected output**
+
+After running the scripts, the following figures will be generated. Users can change the parameter bd_current to the corresponding band by using the following number code (=1, =2,=3,=4, =5, =6, =7). Here, the networks and the properties are those of the band (bd_current=2).
+
+## **Good-outcome patient 1**
+
+The following results are expected when running demo_run_P1.m.
+
+### **Temporal maps**
+
+**![A blue and red lines
 
 
-## Getting started
-Set MATLAB workspace to repository folder, and get started by running the demo scripts on the sample data
+**Figure 1**. **Temporal maps in the spike and ripple bands of good outcome patient 1.** Sample iEEG (50 s) in the spike band with spike annotations (red vertical lines) and its corresponding temporal maps generated using our framework. Sample iEEG (50 s) in the ripple band with ripple annotations (red vertical lines) and its corresponding temporal maps generated from the framework. Red timestamps in the temporal map are time-windows where the epileptogenic network is active while the blue timestamps represent the time-windows where the background network is active.
 
-```vSP_demo.m ```  
-```rSP_demo.m ```  
+### **Epileptogenic and background networks in the band**
 
-Which provides an example of the complete end-to-end pipeline from the SEEG to the final result. The demo scripts will use five-minute SEEG data of two patients sampled from our MNI dataset. They have been downsampled to 200Hz to reduce file size so that it meets the file size limitations of GitHub. These samples can be found in the following subdirectory
-```bash
-demo_data
-├── P4_sample.mat
-├── P58_sample.mat
-└── patient_data.mat
-```
-```patient_data.mat``` is a MATLAB struct with the variable name ```patient``` containing the following fields  
-- Patient index
-- ```channel_name```: Nx1 string array of channel labels
-- ```sampling_freq```: 1x1 double containing the sampling frequency (in Hz)
-- ```soz_ez```: Nx4 cell array
-	- Column 1: Channel labels
-   	- Column 2: 0: non-SOZ, 1: SOZ, 10: extracerebral, 30: marked as artifact
-	- Column 3: 0: non-Resected, 1: resected, 10: extracerebral, 30: marked as artifact
-	- Column 4: 0: non-SOZ and not resected, 1: SOZ and resected, 10: extracerebral, 30: marked as artifact
-- ```engel```: 1x1 string with the surgical outcome of the patient
-- ```channelRegions```: Nx1 string array of channel regions defined in the MICCAI atlas
-- ```extraCerebral```: Mx1 string array of extracerebral channels
-- ```MNI```: Nx3 double array of three dimensional channel coordinates
-- ```spike_gamma_rates```: Nx6 double array of IED-gamma rates computed for each channel in six segments of the one hour interictal data 
+| --- | --- |
 
-## Running the SP framework on your own data
-The main code of interest for the user to apply the framework can be found in the following subdirectory
-```bash
-perturbation
-├── computeCorrelation.m
-├── computeSPMap.m
-├── train_kmeans.m
-└── virtualRemovalSP.m
-```
-Which contains functions to apply the virtual-removal spatial perturbation framework (```virtualRemovalSP.m```), the ranked spatial perturbation framework (```computeSPMap.m```), and train your own unsupervised model (```train_kmeans.m```). 
+**Figure 2**. **Epileptogenic and background networks of good outcome patient 1.** The epileptogenic (red) and background (blue) networks generated by the framework are projected onto the MRI and overlapped with the resection volume (green).
 
-If you wish to apply our method on your data, please consider the following steps: 
-1. Extract the segment of interest from available SEEG data
-2. Apply the bipolar montage on the signal
-3. Preprocess the data with a notch filter and bandpass filter
-4. Remove extracerebral white matter and artifact channels
-5. Apply Janca detector (Janca et al., 2015) to detect interictal epileptiform discharges in the SEEG (see ```spike_detector_hilbert_v25.m```)
-6. Apply postprocessing code (see ```postprocessing_v2.m```) to remove false detections due to artifacts and spindles
-7. Run the spike-gamma code (Thomas et al., 2023) to determine if each IED has signficiant gamma activity preceding its onset (see ```computeSpikeGamma.m```)
-8. Extract channel coordinates by coregisteration of post-implantation MRI (Zelmann et al., 2023)
-9. Run the spatial perturbation framework! (see ```virtualRemovalSP.m``` and ```computeSPMap.m```)
-    
-## Reproducing results
+### **Properties of networks in the band**
 
-```results_pipeline.m``` runs all the scripts to produce all the results in the manuscript.
-The scripts to reproduce the result figures in the manuscript can be found in the following directory
+**![A group of red and blue bars
 
-```bash
-results_figures
-├── figure3_4_perturbation_analysis.m
-├── figure6_sp_map_examples.m
-├── figure7_cluster_analysis.m
-├── figure8_9_covariate_analysis.m
-└── sp_results
-    ├── SPMap_features.mat
-    └── virtual_removal_perturbation.mat
-```
 
-The folder **sp_results** contains the results of the framework applied  on all the patients in our dataset  
-- ```virtual_removal_perturbation.mat``` contains the results of virtual removal SP framework.  
-    - ```data```: 76x7 cell array containing the following data for all patients  
-        1. Patient index (e.g., P4)
-        2. MRI positive/negative
-        3. $\bar{\rho}_{BR,i}$
-        4. $\bar{\rho}_{AR,i}$
-        5. $\bar{\rho}_{RR,i}$
-        6. Surgical outcome (seizure-free=1; non-seizure-free=2)
-        7. Center (MNI=1; CHUGA=2)
-           
-- ```SPMap_features.mat``` contains the results of the rSP framework  
-    - ```feature``` 76x6 cell array containing the following data for all patients:
-        1. Mean of positive perturbation strengths in Quadrant 1
-        2. Mean of positive perturbation strengths in Quadrant 2
-        3. Mean of positive perturbation strengths in Quadrant 3
-        4. Mean of positive perturbation strengths in Quadrant 4  
-        5. Surgical outcome (seizure-free=1; non-seizure-free=2)  
-        6. Center (MNI=1; CHUGA=2)
-    - ```covariates``` contains the following clinical covariates
-        1. SOZ volume
-        2. Resected volume
-        3. Resected SOZ volume
-        4. Percent SOZ removed
-        5. Patient has a complete resection as marked by a clinician (complete resection=1, incomplete=0) 
+**Figure 3**. **Epileptogenic and background network properties in the band and predictive power of good outcome patient 1.** The focality, overlap with resection, and distance from resection, AUC with resection, AUC with SOZ, and the AUC of the temporal map with IED of the epileptogenic (red) and background (blue) networks.
 
-Simply press _run_ on any of the scripts and it should work on it's shown. You will need to change a couple variables to produce center specific results (found at the beginning of each script).  
+## **Poor-outcome patient 31**
 
-## Expected output
-When running ```vSP_demo.m```, you should expect the following results when choosing ```patient_number=1``` (i.e., P4)  
-<p align="center">
-  <img width="45%" src="figures/vSP_output_P4.png"/>
-</p> 
-Which illustrates the constructed spatial system before virtual removal of the SOZ (left), and the perturbed spatial system after virtually removing the SOZ (right).  
+The following results are expected when running demo_run_P31.m.
 
-Running the demo script ```rSP_demo.m``` will produce the SP maps for one of the two patient. The algorithm outputs the following for ```patient_number = 1``` (left), and ```patient_number = 2``` (right)
+### **Temporal Maps**
 
-<p align="center" float="left">
-  <img width="45%" src="figures/rSP_output_P4.png" />
-  <img width="45%" src="figures/rSP_output_P58.png"/>
-</p>  
+**![A close-up of a barcode
 
-Which illustrates the spatial ranking of each channel's perturbation strength.
 
-## References
-* Janca, R., Jezdik, P., Cmejla, R. et al. Detection of Interictal Epileptiform Discharges Using Signal Envelope Distribution Modelling: Application to Epileptic and Non-Epileptic Intracranial Recordings. Brain Topogr 28, 172–183 (2015). https://doi.org/10.1007/s10548-014-0379-1
-* Thomas, J., Kahane, P., Abdallah, C., Avigdor, T., Zweiphenning, W.J.E.M., Chabardes, S., Jaber, K., Latreille, V., Minotti, L., Hall, J., Dubeau, F., Gotman, J. and Frauscher, B. (2023), A Subpopulation of Spikes Predicts Successful Epilepsy Surgery Outcome. Ann Neurol, 93: 522-535. https://doi.org/10.1002/ana.26548
-* Zelmann R, Frauscher B, Aro RP, Gueziri HE, Collins DL. SEEGAtlas: A framework for the identification and classification of depth electrodes using clinical images. J Neural Eng. 2023 May 31;20(3). doi: 10.1088/1741-2552/acd6bd. PMID: 37201515.
-* Morel, (2018). Gramm: grammar of graphics plotting in Matlab. Journal of Open Source Software, 3(23), 568, https://doi.org/10.21105/joss.00568
+**Figure 4**. **Temporal maps in spike and ripple bands of poor outcome patient 31.** Sample iEEG (50 s) in the spike band with spike annotations (red vertical lines) and its corresponding temporal maps generated from the framework. Sample iEEG (50 s) in the ripple band with ripple annotations (red vertical lines) and its corresponding temporal maps generated from the framework. Red timestamps in the temporal map are the time-windows where the epileptogenic network is active while the blue timestamps represent the time-windows where the background network is active.
+
+### **Epileptogenic and background networks in the band**
+
+| --- | --- |
+
+**Figure 5**. **Epileptogenic and background networks in the band of poor outcome patient 31.** The epileptogenic (red) and background (blue) networks generated by the framework are projected onto the MRI and overlapped with the resection volume (green).
+
+### **Properties of networks in the band**
+
+
+
+**Figure 6 Epileptogenic and background network properties in the band and predictive power of poor outcome patient 31.** The focality, overlap with resection, and distance from resection, AUC with resection, AUC with SOZ, and the AUC of the temporal map with IED of the epileptogenic (red) and background (blue) networks in the band.
+
+# **Running the framework on your own data**
+
+To run the framework on your own data, consider following the following steps:
+
+1. Extract clean artifact-free iEEG data segments.
+2. Preprocess the data with a notch filter.
+3. Remove bad channels.
+4. Save the data as ieeg.mat file.
+5. Make sure to specify the Fs and time.
+6. Extract channel coordinates by coregistration of post-implantation MRI with CT. Add the resection volume coordinates if available for the AUCRE computations and the properties of networks.
+7. Make sure the following are available in your workspace:
+
+- Fs : sampling frequency of your data
+- ieeg: segment of iEEG data.
+- time : time in seconds.
+- channel_coordinates : containing the coordinates of the implanted electrodes.
+- soz_channels : contains a vector of 0’s (non-SOZ) and 1’s (SOZ).
+- resection_coordinates : contains the coordinates of the resection volume.
+- spike_annotation : contains the annotations of spikes in time.
+- ripple_annotation : contains the annotations of ripples in time.
+- CustomColormap : a custom colormap used to set the desired network colors (red for epileptogenic and blue for background). Use the one provided with our data.
+
+1. Update the demo code and run.
+2. To plot the networks, you may need to generate the 3D view of the of the provided NIfTI anatomy files, coregister the CT on a software like Brainstorm and overlay the networks.
+
+# **References**
+
+1\. Kutz, J. N., Brunton, S. L., Brunton, B. W. & Proctor, J. L. _Dynamic Mode Decomposition_. (Society for Industrial and Applied Mathematics, Philadelphia, PA, 2016). doi:10.1137/1.9781611974508.
+
+2\. Tadel, F., Baillet, S., Mosher, J. C., Pantazis, D. & Leahy, R. M. Brainstorm: A User-Friendly Application for MEG/EEG Analysis. _Computational Intelligence and Neuroscience_ **2011**, 879716 (2011).
