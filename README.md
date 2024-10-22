@@ -77,9 +77,9 @@ Hmayag Partamian, Saeed Jahromi, Ludovica Corona, M Scott Perr, Eleonora Tamilia
 
 MATLAB (we applied the framework with MATLAB R2022a and 2024a)
 - The following MATLAB toolboxes need to be installed:
-		-‘Signal Processing Toolbox’
-		-‘Statistics and Machine Learning Toolbox’
-		-‘Image Processing Toolbox’ 
+	- ‘Signal Processing Toolbox’
+	- ‘Statistics and Machine Learning Toolbox’
+	- ‘Image Processing Toolbox’ 
 - Dynamic Mode Decomposition (DMD) code ‘DMDfull.m’1, (http://dmdbook.com/)
 - Windows, macOS, or Linux operating system
 
@@ -105,24 +105,24 @@ demo_run_P1.m
 demo_run_P31.m
 
 The demo scripts will automatically perform the following:
-•	Read and preprocess the data, extract the features and the networks, and identify the epileptogenic and background networks. 
-•	Generate the temporal maps with a sample data with annotations in both the spike and ripple bands.
-•	Compute the network properties and evaluate the receiver operating characteristic (ROC)  area under the curve (AUC) with resection, with seizure onset zone (SOZ), and temporal map concordance with interictal epileptiform discharges (IED). 
+-	Read and preprocess the data, extract the features and the networks, and identify the epileptogenic and background networks. 
+-	Generate the temporal maps with a sample data with annotations in both the spike and ripple bands.
+-	Compute the network properties and evaluate the receiver operating characteristic (ROC)  area under the curve (AUC) with resection, with seizure onset zone (SOZ), and temporal map concordance with interictal epileptiform discharges (IED). 
 
 # **Loading data**
 The demo scripts will use the data of two patients sampled from our cohort. P1 was seizure free (good outcome, Engel=I) and P31 had recurring seizures (poor outcome, Engel>I).
-sample_data_P1.mat
-sample_data_P31.mat
+- sample_data_P1.mat
+- sample_data_P31.mat
 After these MATLAB files are loaded, they contain the following variables:
-	Fs : sampling frequency.
-	iEEG : 50 second n-channel interictal iEEG data. 
-	time : time in seconds, [m×1].
-	channel_coordinates: contain the coordinates of the implanted n electrodes, [n×1].
-	soz_channels : contains a vector of size n with 0’s (non-SOZ) and 1’s (SOZ).
-	resection_coordinates : contains the coordinates of the resection volume.
-	spike_annotation : contains the annotations of spikes in time.
-	ripple_annotation : contains the annotations of ripples in time.
-	CustomColormap : a custom colormap used to set the desired network colors (red for epileptogenic and blue for background).
+- Fs : sampling frequency.
+- iEEG : 50 second n-channel interictal iEEG data. 
+-	time : time in seconds, [m×1].
+-	channel_coordinates: contain the coordinates of the implanted n electrodes, [n×1].
+-	soz_channels : contains a vector of size n with 0’s (non-SOZ) and 1’s (SOZ).
+-	resection_coordinates : contains the coordinates of the resection volume.
+-	spike_annotation : contains the annotations of spikes in time.
+-	ripple_annotation : contains the annotations of ripples in time.
+-	CustomColormap : a custom colormap used to set the desired network colors (red for epileptogenic and blue for background).
 
 Note: We provided the MRI and post-implantation CT in NIfTI format in the anatomy folder (MRI_P1.nii, MRI_P31.nii,CT_P1.nii, CT_P31.nii) in case the user wants to process the data from scratch. We used these files to coregister the CT and MRI and extract the channel coordinates of the provided data. 
 
@@ -138,14 +138,6 @@ e)	Steps 1-4 are repeated in the ripple band [80-250 Hz] and ripple annotations 
 f)	The temporal maps and networks can now be visualized via plots.
 g)	The network properties (focality, overlap with resection, and distance from resection) are computed.
 h)	AUC with SOZ, resection, and ripple and spike annotations are then computed to generate the properties plots that make use of the SOZ, resection volume, and the annotations provided. 
-
-
-# **Output of the code**
-The code outputs:
-	The time series data, the annotations (spikes and ripples), and the temporal maps in the spike and the ripple bands.
-	The networks projected on the MRI as well as the resection volumes.
-	The network properties [focality (F_net), overlap with resection (O_res), and distance from resection (D_res)] , and AUC with the SOZ (AUC-SOZ), resection (AUC-RES), and the AUC of the active time-windows with the annotated timestamps of the IEDs and ripples (AUC-IED). 
-Frequency bands: Frequency bands: delta (δ= 1-4 Hz), theta (θ= 4-8 Hz), alpha (α = 8-12 Hz), beta (β = 12-30 Hz), gamma (γ=  30-80 Hz), spike band (sb = 1-80 Hz), and ripple band (rb = 80-250 Hz).
 
 
 # **Expected output**
@@ -220,15 +212,15 @@ To run the framework on your own data, consider the following steps:
 6.	Extract channel coordinates by coregistration of post-implantation MRI with CT. 
 7.	Add the resection volume coordinates, SOZ electrodes, and spike and ripple annotations if availa-ble to extract network properties if available.
 8.	Make sure the following variables are available in your MATLAB workspace:
-•	Fs : sampling frequency of your data
-•	ieeg: segment of iEEG data. 
-•	time : time in seconds.
-•	channel_coordinates : containing the coordinates of the implanted electrodes.
-•	soz_channels : contains a vector of 0’s (non-SOZ) and 1’s (SOZ).
-•	resection_coordinates : contains the coordinates of the resection volume.
-•	spike_annotation : contains the annotations of spikes in time.
-•	ripple_annotation : contains the annotations of ripples in time.
-•	CustomColormap : a custom colormap used to set the desired network colors (red for epileptogenic and blue for background). Use the one provided with our data.
+- 	Fs : sampling frequency of your data
+-	ieeg: segment of iEEG data. 
+-	time : time in seconds.
+-	channel_coordinates : containing the coordinates of the implanted electrodes.
+-	soz_channels : contains a vector of 0’s (non-SOZ) and 1’s (SOZ).
+-	resection_coordinates : contains the coordinates of the resection volume.
+-	spike_annotation : contains the annotations of spikes in time.
+-	ripple_annotation : contains the annotations of ripples in time.
+-	CustomColormap : a custom colormap used to set the desired network colors (red for epileptogenic and blue for background). Use the one provided with our data.
 9.	Update the demo code (variable names and paths) and run.
 10.	To plot the networks, you may need to generate the 3D view of the of the provided NIfTI anat-omy files, coregister the CT on a software like Brainstorm and plot the networks. 
 
