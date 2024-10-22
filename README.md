@@ -35,6 +35,8 @@ Hmayag Partamian, Saeed Jahromi, Ludovica Corona, M Scott Perr, Eleonora Tamilia
 * [**References** 9](#_Toc178680912)
 
 # **Folders**
+
+'''
 .
 ├── LICENSE
 ├── README.md
@@ -67,6 +69,7 @@ Hmayag Partamian, Saeed Jahromi, Ludovica Corona, M Scott Perr, Eleonora Tamilia
 │   └── spike_detector_hilbert_v25.m
 ├── demo_run_P1.m
 └── demo_run_P31.m
+'''
 # Project tree
 * **anatomy**
 	* CT_P1.nii
