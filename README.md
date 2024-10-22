@@ -36,13 +36,8 @@ Hmayag Partamian, Saeed Jahromi, Ludovica Corona, M Scott Perr, Eleonora Tamilia
 
 # **Folders**
 
-root
-+-- dir1
-    +--file1
-+-- dir2
-    +-- file2
 
-    
+```bash 
 .
 ├── LICENSE
 ├── README.md
@@ -75,7 +70,7 @@ root
 │   └── spike_detector_hilbert_v25.m
 ├── demo_run_P1.m
 └── demo_run_P31.m
-'''
+```
 # Project tree
 * **anatomy**
 	* CT_P1.nii
