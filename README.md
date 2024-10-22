@@ -92,6 +92,7 @@ None. Simple unzipping and preparation of the script (fixing paths and preparing
 # **Expected runtime**
 The experiments were performed on a Dell desktop with 12th Gen Intel(R) Core (TM) i9-12900   2.40 GHz with 128 GB RAM, and 64-bit operating system (x64-based processor) Windows 10.
 To process 50-second intracranial EEG (iEEG) with 80-120 channels, with sampling frequency of 1999 Hz, using 95% overlap, and using MATLAB 2024a, the expected overall running time is around 50-90 seconds.
+
 Note: runtime on Code Ocean takes around 1.5 hours for some reason. 3D figures are the reason behind this delay. It is recommended to download the code and run it on a local computer.
 
 
@@ -130,14 +131,14 @@ Note: We provided the MRI and post-implantation CT in NIfTI format in the anatom
 # **Processing pipeline**
 
 The code runs by calling different functions listed in the function folder and performs the following pipeline:
-a)	The data is first filtered in the spike band [1-80 Hz] using 4th order Butterworth filter (MATLAB)
-b)	After setting the percentage of overlap (perc), number of modes (r_input), and window size parameter offset, the extractFeatures function dissects the data into windows, applies the DMD, and outputs the DMD spectral power features, the mean frequency of modes across windows, and the spike labels of each window.
-c)	The mean frequencies are processed using getIndices function to identify indices of the modes that fall within each of the six bands for the spike band analysis.
-d)	Extract_networks_and_temporal_maps function takes the indices and the DMD spectral powers across windows to find the dominantly reoccurring spatial configurations and their corresponding activity across windows. The function also identifies the epileptogenic and background networks and outputs the indices of the temporal maps. 
-e)	Steps 1-4 are repeated in the ripple band [80-250 Hz] and ripple annotations to extract the epileptogenic and background networks and their temporal maps in the ripple band.
-f)	The temporal maps and networks can now be visualized via plots.
-g)	The network properties (focality, overlap with resection, and distance from resection) are computed.
-h)	AUC with SOZ, resection, and ripple and spike annotations are then computed to generate the properties plots that make use of the SOZ, resection volume, and the annotations provided. 
+1.	The data is first filtered in the spike band [1-80 Hz] using 4th order Butterworth filter (MATLAB)
+2.	After setting the percentage of overlap (perc), number of modes (r_input), and window size parameter offset, the extractFeatures function dissects the data into windows, applies the DMD, and outputs the DMD spectral power features, the mean frequency of modes across windows, and the spike labels of each window.
+3.	The mean frequencies are processed using getIndices function to identify indices of the modes that fall within each of the six bands for the spike band analysis.
+4.	Extract_networks_and_temporal_maps function takes the indices and the DMD spectral powers across windows to find the dominantly reoccurring spatial configurations and their corresponding activity across windows. The function also identifies the epileptogenic and background networks and outputs the indices of the temporal maps. 
+5.	Steps 1-4 are repeated in the ripple band [80-250 Hz] and ripple annotations to extract the epileptogenic and background networks and their temporal maps in the ripple band.
+6.	The temporal maps and networks can now be visualized via plots.
+7.	The network properties (focality, overlap with resection, and distance from resection) are computed.
+8.	AUC with SOZ, resection, and ripple and spike annotations are then computed to generate the properties plots that make use of the SOZ, resection volume, and the annotations provided. 
 
 
 # **Expected output**
@@ -145,6 +146,7 @@ The code outputs:
 	The time series data, the annotations (spikes and ripples), and the temporal maps in the spike and the ripple bands.
 	The networks projected on the MRI as well as the resection volumes.
 	The network properties [focality (F_net), overlap with resection (O_res), and distance from resection (D_res)] , and AUC with the SOZ (AUC-SOZ), resection (AUC-RES), and the AUC of the active time-windows with the annotated timestamps of the IEDs and ripples (AUC-IED). 
+
 Frequency bands: Frequency bands: delta (δ= 1-4 Hz), theta (θ= 4-8 Hz), alpha (α = 8-12 Hz), beta (β = 12-30 Hz), gamma (γ=  30-80 Hz), spike band (sb = 1-80 Hz), and ripple band (rb = 80-250 Hz).
 
 
