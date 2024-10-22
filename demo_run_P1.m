@@ -39,7 +39,7 @@ if figflag
         surf(X1*val(i)+channel_coordinates(i,1),Y1*val(i)+channel_coordinates(i,2),Z1*val(i)+channel_coordinates(i,3),'Facecolor','w','Edgecolor','w','FaceAlpha',0.5)
     end
     axis square
-    title('MRI, Resection Volume, and Electrodes of Patient 31')
+    title('MRI, Resection Volume, and Electrodes of Patient 1')
     set(gca,'xticklabel',{[]})
     set(gca,'yticklabel',{[]})
     set(gca,'zticklabel',{[]})
@@ -52,7 +52,7 @@ if figflag
     set(gcf, 'Position', get(0, 'Screensize'));
     xlim([-0.11,0.18])
     zlim([-0.09,0.19])
-    saveas(gcf, './results/MRIandResectionandElectrodes_P31.png')
+    saveas(gcf, './results/MRIandResectionandElectrodes_P1.png')
 end
 
 %% plot the data segment
@@ -79,7 +79,7 @@ if figflag
     yticklabels(channels)
     set(gca,'fontsize',8)
     set(gcf, 'Position', get(0, 'Screensize'));
-    title('Sample Data for Patient 31')
+    title('Sample Data for Patient 1')
     set(gcf, 'Position', get(0, 'Screensize'));
 end
 
@@ -113,7 +113,7 @@ if figflag
     yticklabels(channels)
     set(gca,'fontsize',8)
     set(gcf, 'Position', get(0, 'Screensize'));
-    title('Sample segment in the spike band for Patient 31')
+    title('Sample segment in the spike band for Patient 1')
     set(gcf, 'Position', get(0, 'Screensize'));
 end
 %% using the sliding window approach,extract the features
@@ -229,9 +229,9 @@ if figflag
     yticklabels({'\it rb'})
     title('Temporal map in \itrb')
     xlabel('window ID')
-    sgtitle('Patient 31 temporal maps of 50s sample iEEG data')
+    sgtitle('Patient 1 temporal maps of 50s sample iEEG data')
     set(gcf, 'Position', get(0, 'Screensize'));
-    saveas(gcf, './results/TemporalMap50sec_P31.png')
+    saveas(gcf, './results/TemporalMap50sec_P1.png')
 end
 
 %% plot temporal maps for the first 10 seconds
@@ -282,9 +282,9 @@ if figflag
     yticklabels({'\it rb'})
     title('Temporal map in \itrb')
     xlabel('window ID')
-    sgtitle('Patient 31 temporal maps of 10s sample iEEG data')
+    sgtitle('Patient 1 temporal maps of 10s sample iEEG data')
     set(gcf, 'Position', get(0, 'Screensize'));
-    saveas(gcf, './results/TemporalMap10sec_P31.png')
+    saveas(gcf, './results/TemporalMap10sec_P1.png')
 end
 
 %% plot the epileptogenic and background networks
@@ -318,7 +318,7 @@ if figflag
     axis square
     xlim([-0.11,0.18])
     zlim([-0.09,0.19])
-    title('\color{red} Epileptogenic Network')
+    title('\color{red} Epileptogenic Network', 'FontSize', 24)
     set(gca,'xticklabel',{[]})
     set(gca,'yticklabel',{[]})
     set(gca,'zticklabel',{[]})
@@ -348,14 +348,14 @@ if figflag
     axis square
     xlim([-0.11,0.18])
     zlim([-0.09,0.19])
-    title('\color{blue} Background Network')
+    title('\color{blue} Background Network','FontSize', 24)
     set(gca,'xticklabel',{[]})
     set(gca,'yticklabel',{[]})
     set(gca,'zticklabel',{[]})
     set(gcf,'color','w');
-    sgtitle('Patient 31 Networks')
+    sgtitle('Patient 1 Networks')
     set(gcf, 'Position', get(0, 'Screensize'));
-    saveas(gcf, './results/Networks_P31.png')
+    saveas(gcf, './results/Networks_P1.png')
 end
 
 %% overlayed networks
@@ -412,7 +412,7 @@ if figflag
     axis square
     xlim([-0.11,0.18])
     zlim([-0.09,0.19])
-    title('Epileptogenic and Backlground Networks of Patient 31')
+    title('Epileptogenic and Backlground Networks of Patient 1')
     set(gca,'xticklabel',{[]})
     set(gca,'yticklabel',{[]})
     set(gca,'zticklabel',{[]})
@@ -424,7 +424,7 @@ if figflag
     l=legend(h, '\color{red} Epileptogenic','\color{blue} Background');
     fontsize(l,14,'points')
     set(gcf, 'Position', get(0, 'Screensize'));
-    saveas(gcf, './results/Networks Overlayed_P31.png')
+    saveas(gcf, './results/Networks Overlayed_P1.png')
 end
 
 
@@ -561,9 +561,9 @@ if figflag
     title('AUC-IED')
     text(1:length(x), AUCIED(:,bd_current)',num2str(round(AUCIED(:,bd_current),2)),'vert','bottom','horiz','center');
     set(gcf,'color','w')
-    sgtitle('Patient 31 Network Properties in the \theta band ({\color{blue}BN\color{black} & \color{red}EN}) ')
+    sgtitle('Patient 1 Network Properties in the \theta band ({\color{blue}BN\color{black} & \color{red}EN}) ')
     set(gcf, 'Position', get(0, 'Screensize'));
-    saveas(gcf, './results/NetworkProperties_P31.png')
+    saveas(gcf, './results/NetworkProperties_P1.png')
 end
 
 

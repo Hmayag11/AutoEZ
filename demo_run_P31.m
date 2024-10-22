@@ -319,7 +319,7 @@ if figflag
     axis square
     xlim([-0.1445,0.1539])
     zlim([-0.14,0.15])
-    title('\color{red} Epileptogenic Network')
+    title('\color{red} Epileptogenic Network','FontSize', 24)
     set(gca,'xticklabel',{[]})
     set(gca,'yticklabel',{[]})
     set(gca,'zticklabel',{[]})
@@ -349,7 +349,7 @@ if figflag
     axis square
     xlim([-0.1445,0.1539])
     zlim([-0.14,0.15])
-    title('\color{blue} Background Network')
+    title('\color{blue} Background Network','FontSize', 24)
     set(gca,'xticklabel',{[]})
     set(gca,'yticklabel',{[]})
     set(gca,'zticklabel',{[]})
