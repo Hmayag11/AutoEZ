@@ -35,7 +35,38 @@ Hmayag Partamian, Saeed Jahromi, Ludovica Corona, M Scott Perr, Eleonora Tamilia
 * [**References** 9](#_Toc178680912)
 
 # **Folders**
-$ ./tree-md .
+.
+├── LICENSE
+├── README.md
+├── anatomy
+│   ├── CT_P1.nii
+│   ├── CT_P31.nii
+│   ├── MRI_P1.nii
+│   └── MRI_P31.nii
+├── figures
+│   ├── background_network_P1.png
+│   ├── background_network_P31.png
+│   ├── epileptogenic_network_P1.png
+│   ├── epileptogenic_network_P31.png
+│   ├── temporal_map_P1.png
+│   ├── temporal_map_P31.png
+│   ├── properties_P1.png
+│   └── properties_P1.png
+├── functions
+│   ├── distiance_electrodes_to_resection.m
+│   ├── DMDfull.m
+│   ├── Extract_networks_and_temporal_maps.m
+│   ├── extractFeatures.m
+│   └── getIndices.m
+├── results
+├── sample_data
+│   ├── sample_data_P1.mat
+│   ├── sample_data_P31.mat
+│   ├── compute_spike_boundary.m
+│   ├── postprocessing_v2.m
+│   └── spike_detector_hilbert_v25.m
+├── demo_run_P1.m
+└── demo_run_P31.m
 # Project tree
 * **anatomy**
 	* CT_P1.nii
