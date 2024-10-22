@@ -36,7 +36,13 @@ Hmayag Partamian, Saeed Jahromi, Ludovica Corona, M Scott Perr, Eleonora Tamilia
 
 # **Folders**
 
-'''
+root
++-- dir1
+    +--file1
++-- dir2
+    +-- file2
+
+    
 .
 ├── LICENSE
 ├── README.md
