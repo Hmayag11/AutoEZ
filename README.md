@@ -76,12 +76,12 @@ Hmayag Partamian, Saeed Jahromi, Ludovica Corona, M Scott Perr, Eleonora Tamilia
 # **Prerequisites**
 
 MATLAB (we applied the framework with MATLAB R2022a and 2024a)
-• The following MATLAB toolboxes need to be installed:
-– ‘Signal Processing Toolbox’
-– ‘Statistics and Machine Learning Toolbox’
-– ‘Image Processing Toolbox’ 
-• Dynamic Mode Decomposition (DMD) code ‘DMDfull.m’1, (http://dmdbook.com/)
-• Windows, macOS, or Linux operating system
+- The following MATLAB toolboxes need to be installed:
+	-‘Signal Processing Toolbox’
+	-‘Statistics and Machine Learning Toolbox’
+	-‘Image Processing Toolbox’ 
+- Dynamic Mode Decomposition (DMD) code ‘DMDfull.m’1, (http://dmdbook.com/)
+- Windows, macOS, or Linux operating system
 
 Note: Brainstorm2 was used to process and analyze most of the 3D data, but it is not a prerequisite to run the code. 
 
